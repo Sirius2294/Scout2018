@@ -7,22 +7,27 @@ import java.util.*;
 
 public class InputPanel extends JPanel{
 	
-	ArrayList<Team> teamList;
+	ArrayList<Team> teamList;//ArrayList<Team> holding all the team objects
 	
-	Save saveList;
+	Save saveList;//Save object used for saving teamList to a txt file
 	
 	/*
 	 * GUI Components
 	 */
-	Font font;
+	Font font;//Font object to be assigned to all components
 	
+	/*
+	 * Headers
+	 */
 	JLabel nameLbl;
 	
 	JLabel exchangeScoreLbl;
 	JLabel switchScoreLbl;
 	JLabel scaleScoreLbl;
 	
-	
+	/*
+	 * Fields and Buttons to input team data
+	 */
 	JTextField nameFld;
 	
 	JRadioButton climbBtn;
@@ -33,45 +38,46 @@ public class InputPanel extends JPanel{
 	JTextField switchScoreFld;
 	JTextField scaleScoreFld;
 	
+	/*
+	 * Buttons to save or show the data
+	 */
 	JButton submitBtn;
 	JButton statsBtn;
 	
 	
 	
 	public InputPanel() {
+		//sets the layout to GridBagLayout
 		setLayout(new GridBagLayout());
 		
+		//initializes the saveList
 		saveList = new Save();
 		
+		//Initializes teamList by reading in the data from ScoutingInfo.txt
 		try {
 			teamList = saveList.loadArrayList();
 		}catch(IOException e) {
 			JOptionPane.showMessageDialog(null, "File \"ScoutingInfo.txt\" cannot be found.");
 		}
 		
+		//Initializes font to a specific size based on the size of the screen
 		font = Screenfit.getFont();
 		
-		/*
-		 * Lbls
-		 */
-		
+		//Initializes all the JLabel headers
 		nameLbl = new JLabel("Name");
 		
 		exchangeScoreLbl = new JLabel("Exchange Score");
 		switchScoreLbl = new JLabel("Switch Score");
 		scaleScoreLbl = new JLabel("Scale Score");
 		
-		
+		//Sets the font of all JLabel headers to font
 		nameLbl.setFont(font);
 		exchangeScoreLbl.setFont(font);
 		switchScoreLbl.setFont(font);
 		scaleScoreLbl.setFont(font);
 		
 		
-		/*
-		 * Fld and Btns
-		 */
-		
+		//Initializes all the Fields and Buttons for team data input
 		nameFld = new JTextField(4);
 		
 		climbBtn = new JRadioButton("Climb");
@@ -85,7 +91,7 @@ public class InputPanel extends JPanel{
 		submitBtn = new JButton("Submit");
 		statsBtn = new JButton("Stats");
 		
-		
+		//sets the font of all Fields and Buttons for team data input to font
 		nameLbl.setFont(font);
 		climbBtn.setFont(font);
 		autoScoreBtn.setFont(font);
@@ -97,18 +103,23 @@ public class InputPanel extends JPanel{
 		statsBtn.setFont(font);
 		
 		
+		//declares and initializes radioListener
 		radioButtonListener radioListener = new radioButtonListener();
+		//adds radioListener to all JRadioButton objects
 		climbBtn.addActionListener(radioListener);
 		autoScoreBtn.addActionListener(radioListener);
 		robotFunctionedBtn.addActionListener(radioListener);
 		
-		
+		//simulates a click on the robotFunctionedBtn JRadioButton
 		robotFunctionedBtn.doClick();
+		
+		//adds a new ActionListener to submitBtn
 		submitBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				int index = 0;
+				int index = 0;//initializes index to 0
 				try {
+					//sets index to the index in teamList of the element with the same name as the contents of nameFld or -1 if no element has the same name as the contents of nameFld.
 					index = getTeamIndex(Integer.parseInt(nameFld.getText()));
 					if(index >= 0) {
 						if(robotFunctionedBtn.isSelected()) {
