@@ -31,8 +31,11 @@ public class InputPanel extends JPanel{
 	JTextField nameFld;
 	
 	JRadioButton climbBtn;
-	JRadioButton autoScoreBtn;
+	JRadioButton autoCrossLineBtn;
+	JRadioButton autoSwitchScoreBtn;
+	JRadioButton autoScaleScoreBtn;
 	JRadioButton robotFunctionedBtn;
+	JRadioButton winBtn;
 	
 	JTextField exchangeScoreFld;
 	JTextField switchScoreFld;
@@ -81,8 +84,11 @@ public class InputPanel extends JPanel{
 		nameFld = new JTextField(4);
 		
 		climbBtn = new JRadioButton("Climb");
-		autoScoreBtn = new JRadioButton("Auto Score");
+		autoCrossLineBtn = new JRadioButton("Auto Cross Line");
+		autoSwitchScoreBtn = new JRadioButton("Auto Switch Score");
+		autoScaleScoreBtn = new JRadioButton("Auto Scale Score");
 		robotFunctionedBtn = new JRadioButton("Functioned");
+		winBtn = new JRadioButton("Win");
 		
 		exchangeScoreFld = new JTextField(4);
 		switchScoreFld = new JTextField(4);
@@ -94,8 +100,11 @@ public class InputPanel extends JPanel{
 		//sets the font of all Fields and Buttons for team data input to font
 		nameLbl.setFont(font);
 		climbBtn.setFont(font);
-		autoScoreBtn.setFont(font);
+		autoCrossLineBtn.setFont(font);
+		autoSwitchScoreBtn.setFont(font);
+		autoScaleScoreBtn.setFont(font);
 		robotFunctionedBtn.setFont(font);
+		winBtn.setFont(font);
 		exchangeScoreFld.setFont(font);
 		switchScoreFld.setFont(font);
 		scaleScoreFld.setFont(font);
@@ -107,8 +116,11 @@ public class InputPanel extends JPanel{
 		radioButtonListener radioListener = new radioButtonListener();
 		//adds radioListener to all JRadioButton objects
 		climbBtn.addActionListener(radioListener);
-		autoScoreBtn.addActionListener(radioListener);
+		autoCrossLineBtn.addActionListener(radioListener);
+		autoSwitchScoreBtn.addActionListener(radioListener);
+		autoScaleScoreBtn.addActionListener(radioListener);
 		robotFunctionedBtn.addActionListener(radioListener);
+		winBtn.addActionListener(radioListener);
 		
 		//simulates a click on the robotFunctionedBtn JRadioButton
 		robotFunctionedBtn.doClick();

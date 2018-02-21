@@ -9,6 +9,8 @@ public class StatsPanel extends JPanel {
 	private Font font;
 
 	private JButton[] headers;
+	private int[] selectionMode;
+	
 	private Team[] teamList;
 
 	private JTextField[][] table;
@@ -21,6 +23,8 @@ public class StatsPanel extends JPanel {
 		font = Screenfit.getFont();
 		
 		headers = new JButton[7];
+		
+		selectionMode = new int[7];
 
 		headers[0] = new JButton("Team #");
 		headers[1] = new JButton("Climb Rate");
@@ -33,6 +37,7 @@ public class StatsPanel extends JPanel {
 		for(int x = 0; x < headers.length; x++) {
 			headers[x].addActionListener(new HeaderListener(x));
 		}
+		
 		
 		teamList = new Team[list.size()];
 		list.toArray(teamList);
@@ -57,17 +62,41 @@ public class StatsPanel extends JPanel {
 
 	private class HeaderListener implements ActionListener {
 		private int index;
+		private Color defaultBackground;
 
 		public HeaderListener(int buttonIndex) {
 			index = buttonIndex;
+			selectionMode[index] = 0;
+			defaultBackground = headers[0].getBackground();
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			for(int x = 0; x < teamList.length; x++) {
 				teamList[x].setSortingType(index);
-				arrangeTable();
 			}
+			switch(selectionMode[index]) {
+			case 0:
+				for(int x = 0; x < headers.length; x++) {
+					headers[x].setBackground(defaultBackground);
+					selectionMode[x] = 0;
+				}
+				selectionMode[index] = 1;
+				headers[index].setBackground(new Color(0, 200, 0));
+				arrangeTable(true);
+				break;
+			case 1:
+				selectionMode[index] = 2;
+				headers[index].setBackground(new Color(200, 0, 0));
+				arrangeTable(false);
+				break;
+			case 2:
+				selectionMode[index] = 1;
+				headers[index].setBackground(new Color(0, 200, 0));
+				arrangeTable(true);
+				break;
+			}
+			
 		}
 	}
 	
@@ -75,17 +104,30 @@ public class StatsPanel extends JPanel {
 	 * Sorting Table
 	 */
 	
-	private void arrangeTable() {
+	private void arrangeTable(boolean forward) {
 		teamList = quicksort(teamList, 0, teamList.length);
 		
-		for(int x = 0; x < table.length; x++) {
-			table[x][0].setText(format(teamList[x].getName()));
-			table[x][1].setText(format(teamList[x].getClimbRate()) + "%");
-			table[x][2].setText(format(teamList[x].getAutoScoreRate()) + "%");
-			table[x][3].setText(format(teamList[x].getRobotFunctionedRate()) + "%");
-			table[x][4].setText(format(teamList[x].getExchangeScoreAvg()));
-			table[x][5].setText(format(teamList[x].getSwitchScoreAvg()));
-			table[x][6].setText(format(teamList[x].getScaleScoreAvg()));
+		if(forward) {
+			for(int x = 0; x < table.length; x++) {
+				table[x][0].setText(format(teamList[x].getName()));
+				table[x][1].setText(format(teamList[x].getClimbRate()) + "%");
+				table[x][2].setText(format(teamList[x].getAutoScoreRate()) + "%");
+				table[x][3].setText(format(teamList[x].getRobotFunctionedRate()) + "%");
+				table[x][4].setText(format(teamList[x].getExchangeScoreAvg()));
+				table[x][5].setText(format(teamList[x].getSwitchScoreAvg()));
+				table[x][6].setText(format(teamList[x].getScaleScoreAvg()));
+			}
+		}
+		else {
+			for(int x = 0; x < table.length; x++) {
+				table[x][0].setText(format(teamList[table.length - x - 1].getName()));
+				table[x][1].setText(format(teamList[table.length - x - 1].getClimbRate()) + "%");
+				table[x][2].setText(format(teamList[table.length - x - 1].getAutoScoreRate()) + "%");
+				table[x][3].setText(format(teamList[table.length - x - 1].getRobotFunctionedRate()) + "%");
+				table[x][4].setText(format(teamList[table.length - x - 1].getExchangeScoreAvg()));
+				table[x][5].setText(format(teamList[table.length - x - 1].getSwitchScoreAvg()));
+				table[x][6].setText(format(teamList[table.length - x - 1].getScaleScoreAvg()));
+			}
 		}
 	}
 	

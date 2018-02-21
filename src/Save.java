@@ -78,7 +78,7 @@ public class Save {
 		return teamList;
 	}
 	
-	private String format(int num) {
-		return String.format("%d", num);
+	private <T> String format(T n) {
+		return "" + n;
 	}
 }

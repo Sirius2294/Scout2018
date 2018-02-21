@@ -6,8 +6,11 @@ public class Team {
 	public static final int numOfRounds = 4;//Change this when we get to the competition
 	
 	private boolean[] climb;
-	private boolean[] autoScore;
+	private boolean[] autoCrossLine;
+	private boolean[] autoSwitchScore;
+	private boolean[] autoScaleScore;
 	private boolean[] robotFunctioned;
+	private boolean[] win;
 	
 	private int[] exchangeScore;
 	private int[] switchScore;
@@ -21,8 +24,11 @@ public class Team {
 		round = 0;
 		
 		climb = new boolean[numOfRounds];
-		autoScore = new boolean[numOfRounds];
+		autoCrossLine = new boolean[numOfRounds];
+		autoSwitchScore = new boolean[numOfRounds];
+		autoScaleScore = new boolean[numOfRounds];
 		robotFunctioned = new boolean[numOfRounds];
+		win = new boolean[numOfRounds];
 		
 		exchangeScore = new int[numOfRounds];
 		switchScore = new int[numOfRounds];
@@ -44,14 +50,18 @@ public class Team {
 		case 1:
 			return getClimbRate();
 		case 2:
-			return getAutoScoreRate();
+			return getAutoCrossLineRate();
 		case 3:
-			return getRobotFunctionedRate();
+			return getAutoSwitchScoreRate();
 		case 4:
-			return getExchangeScoreAvg();
+			return getAutoScaleScoreRate();
 		case 5:
-			return getSwitchScoreAvg();
+			return getRobotFunctionedRate();
 		case 6:
+			return getExchangeScoreAvg();
+		case 7:
+			return getSwitchScoreAvg();
+		case 8:
 			return getScaleScoreAvg();
 		default:
 			return (double) name;
@@ -67,8 +77,16 @@ public class Team {
 		climb[round] = didClimb;
 	}
 	
-	public void addAutoScore(boolean didScore) {
-		autoScore[round] = didScore;
+	public void addAutoCrossLine(boolean didScore) {
+		autoCrossLine[round] = didScore;
+	}
+	
+	public void addAutoSwitchScore(boolean didScore) {
+		autoSwitchScore[round] = didScore;
+	}
+	
+	public void addAutoScaleScore(boolean didScore) {
+		autoScaleScore[round] = didScore;
 	}
 	
 	public void addRobotFunctioned(boolean didFunction) {
@@ -85,6 +103,10 @@ public class Team {
 	
 	public void addScaleScore(int numOfBoxes) {
 		scaleScore[round] = numOfBoxes;
+	}
+	
+	public void addWin(boolean didWin) {
+		win[round] = didWin;
 	}
 	
 	public void addRound() {
@@ -104,8 +126,16 @@ public class Team {
 		return climb[round];
 	}
 	
-	public boolean getAutoScore(int round) {
-		return autoScore[round];
+	public boolean getAutoCrossLine(int round) {
+		return autoCrossLine[round];
+	}
+	
+	public boolean getAutoSwitchScore(int round) {
+		return autoSwitchScore[round];
+	}
+	
+	public boolean getAutoScaleScore(int round) {
+		return autoScaleScore[round];
 	}
 	
 	public boolean getRobotFunctioned(int round) {
@@ -122,6 +152,10 @@ public class Team {
 	
 	public int getScaleScore(int round) {
 		return scaleScore[round];
+	}
+	
+	public boolean getWin(int round) {
+		return win[round];
 	}
 	
 	public int getRound() {
@@ -142,10 +176,30 @@ public class Team {
 		return rate / round * 100;
 	}
 	
-	public double getAutoScoreRate() {
+	public double getAutoCrossLineRate() {
 		double rate = 0;
 		for(int x = 0; x < round; x++) {
-			if(autoScore[x]) {
+			if(autoCrossLine[x]) {
+				rate++;
+			}
+		}
+		return rate/ round * 100;
+	}
+	
+	public double getAutoSwitchScoreRate() {
+		double rate = 0;
+		for(int x = 0; x < round; x++) {
+			if(autoSwitchScore[x]) {
+				rate++;
+			}
+		}
+		return rate / round * 100;
+	}
+	
+	public double getAutoScaleScoreRate() {
+		double rate = 0;
+		for(int x = 0; x < round; x++) {
+			if(autoScaleScore[x]) {
 				rate++;
 			}
 		}
@@ -184,5 +238,14 @@ public class Team {
 			avg += scaleScore[x];
 		}
 		return avg / round;
+	}
+	
+	public double getWinRate() {
+		double rate = 0;
+		for(int x = 0; x < round; x++) {
+			if(win[x])
+				rate++;
+		}
+		return rate / round * 100;
 	}
 }
