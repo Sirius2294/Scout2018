@@ -63,6 +63,8 @@ public class Team {
 			return getSwitchScoreAvg();
 		case 8:
 			return getScaleScoreAvg();
+		case 9:
+			return getWinRate();
 		default:
 			return (double) name;
 		}

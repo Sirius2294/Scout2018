@@ -136,19 +136,25 @@ public class InputPanel extends JPanel{
 					if(index >= 0) {
 						if(robotFunctionedBtn.isSelected()) {
 							teamList.get(index).addClimb(climbBtn.isSelected());
-							teamList.get(index).addAutoScore(autoScoreBtn.isSelected());
+							teamList.get(index).addAutoCrossLine(autoCrossLineBtn.isSelected());
+							teamList.get(index).addAutoSwitchScore(autoSwitchScoreBtn.isSelected());
+							teamList.get(index).addAutoScaleScore(autoScaleScoreBtn.isSelected());
 							teamList.get(index).addRobotFunctioned(robotFunctionedBtn.isSelected());
 							teamList.get(index).addExchangeScore(Integer.parseInt(exchangeScoreFld.getText()));
 							teamList.get(index).addSwitchScore(Integer.parseInt(switchScoreFld.getText()));
 							teamList.get(index).addScaleScore(Integer.parseInt(scaleScoreFld.getText()));
+							teamList.get(index).addWin(winBtn.isSelected());
 						}
 						else {
 							teamList.get(index).addClimb(false);
-							teamList.get(index).addAutoScore(false);
+							teamList.get(index).addAutoCrossLine(false);
+							teamList.get(index).addAutoSwitchScore(false);
+							teamList.get(index).addAutoScaleScore(false);
 							teamList.get(index).addRobotFunctioned(false);
 							teamList.get(index).addExchangeScore(0);
 							teamList.get(index).addSwitchScore(0);
 							teamList.get(index).addScaleScore(0);
+							teamList.get(index).addWin(false);
 						}
 						teamList.get(index).addRound();
 						saveList.saveTextFile(teamList);
@@ -199,14 +205,17 @@ public class InputPanel extends JPanel{
 		
 		add(nameFld, getComponentConstraints(0));
 		add(climbBtn, getComponentConstraints(6));
-		add(autoScoreBtn, getComponentConstraints(1));
-		add(robotFunctionedBtn, getComponentConstraints(2));
-		add(exchangeScoreFld, getComponentConstraints(3));
-		add(switchScoreFld, getComponentConstraints(4));
-		add(scaleScoreFld, getComponentConstraints(5));
+		add(autoCrossLineBtn, getComponentConstraints(1));
+		add(autoSwitchScoreBtn, getComponentConstraints(2));
+		add(autoScaleScoreBtn, getComponentConstraints(3));
+		add(robotFunctionedBtn, getComponentConstraints(4));
+		add(exchangeScoreFld, getComponentConstraints(5));
+		add(switchScoreFld, getComponentConstraints(7));
+		add(scaleScoreFld, getComponentConstraints(8));
+		add(winBtn, getComponentConstraints(9));
 		
-		add(submitBtn, getComponentConstraints(7));
-		add(statsBtn, getLabelConstraints(7));
+		add(submitBtn, getComponentConstraints(10));
+		add(statsBtn, getLabelConstraints(10));
 	}
 	
 	private int getTeamIndex(int name) {
@@ -222,13 +231,20 @@ public class InputPanel extends JPanel{
 		nameFld.setText("");
 		
 		climbBtn.setSelected(false);
-		autoScoreBtn.setSelected(false);
+		autoCrossLineBtn.setSelected(false);
+		autoSwitchScoreBtn.setSelected(false);
+		autoScaleScoreBtn.setSelected(false);
 		robotFunctionedBtn.setSelected(true);
 		robotFunctionedBtn.setForeground(new Color(0 ,200, 0));
+		autoCrossLineBtn.setForeground(Color.BLACK);
+		autoSwitchScoreBtn.setForeground(Color.BLACK);
+		autoScaleScoreBtn.setForeground(Color.BLACK);
 		
 		exchangeScoreFld.setText("");
 		switchScoreFld.setText("");
 		scaleScoreFld.setText("");
+		winBtn.setSelected(false);
+		winBtn.setForeground(Color.BLACK);
 	}
 	
 	

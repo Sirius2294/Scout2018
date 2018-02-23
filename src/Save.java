@@ -33,11 +33,14 @@ public class Save {
 				pen.newLine();
 				//pen.write(format(q) + " ");
 				pen.write(format(list.get(x).getClimb(q) ? 1 : 0) + " ");
-				pen.write(format(list.get(x).getAutoScore(q) ? 1 : 0) + " ");
+				pen.write(format(list.get(x).getAutoCrossLine(q) ? 1 : 0) + " ");
+				pen.write(format(list.get(x).getAutoSwitchScore(q) ? 1 : 0) + " ");
+				pen.write(format(list.get(x).getAutoScaleScore(q) ? 1 : 0) + " ");
 				pen.write(format(list.get(x).getRobotFunctioned(q) ? 1 : 0) + " ");
 				pen.write(format(list.get(x).getExchangeScore(q)) + " ");
 				pen.write(format(list.get(x).getSwitchScore(q)) + " ");
-				pen.write(format(list.get(x).getScaleScore(q)));
+				pen.write(format(list.get(x).getScaleScore(q)) + " ");
+				pen.write(format(list.get(x).getWin(q) ? 1 : 0));
 			}
 			pen.newLine();
 			pen.newLine();
@@ -62,12 +65,15 @@ public class Save {
 			
 			for(int x = 0; x < numOfRounds; x++) {
 				t.addClimb(book.next().equals("1"));
-				t.addAutoScore(book.next().equals("1"));
+				t.addAutoCrossLine(book.next().equals("1"));
+				t.addAutoSwitchScore(book.next().equals("1"));
+				t.addAutoScaleScore(book.next().equals("1"));
 				t.addRobotFunctioned(book.next().equals("1"));
 				
 				t.addExchangeScore(Integer.parseInt(book.next()));
 				t.addSwitchScore(Integer.parseInt(book.next()));
 				t.addScaleScore(Integer.parseInt(book.next()));
+				t.addWin(book.next().equals("1"));
 				t.addRound();
 			}
 			

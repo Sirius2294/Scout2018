@@ -18,21 +18,24 @@ public class StatsPanel extends JPanel {
 	private int pivotPosition;
 
 	public StatsPanel(ArrayList<Team> list) {
-		setLayout(new GridLayout(list.size()+1, 7));
+		setLayout(new GridLayout(list.size()+1, 10));
 
 		font = Screenfit.getFont();
 		
-		headers = new JButton[7];
+		headers = new JButton[10];
 		
-		selectionMode = new int[7];
+		selectionMode = new int[headers.length];
 
 		headers[0] = new JButton("Team #");
 		headers[1] = new JButton("Climb Rate");
-		headers[2] = new JButton("Auto Score Rate");
-		headers[3] = new JButton("Robot Functioned Rate");
-		headers[4] = new JButton("Exchange Score AVG");
-		headers[5] = new JButton("Switch Score AVG");
-		headers[6] = new JButton("Scale Score AVG");
+		headers[2] = new JButton("Auto CrossLine Rate");
+		headers[3] = new JButton("Auto Switch Score Rate");
+		headers[4] = new JButton("Auto Scale Score Rate");
+		headers[5] = new JButton("Robot Functioned Rate");
+		headers[6] = new JButton("Exchange Score AVG");
+		headers[7] = new JButton("Switch Score AVG");
+		headers[8] = new JButton("Scale Score AVG");
+		headers[9] = new JButton("Win Rate");
 		
 		for(int x = 0; x < headers.length; x++) {
 			headers[x].addActionListener(new HeaderListener(x));
@@ -42,7 +45,7 @@ public class StatsPanel extends JPanel {
 		teamList = new Team[list.size()];
 		list.toArray(teamList);
 
-		table = new JTextField[teamList.length][7];
+		table = new JTextField[teamList.length][10];
 
 		for (int x = 0; x < headers.length; x++) {
 			headers[x].setFont(font);
@@ -111,22 +114,28 @@ public class StatsPanel extends JPanel {
 			for(int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[x].getName()));
 				table[x][1].setText(format(teamList[x].getClimbRate()) + "%");
-				table[x][2].setText(format(teamList[x].getAutoScoreRate()) + "%");
-				table[x][3].setText(format(teamList[x].getRobotFunctionedRate()) + "%");
-				table[x][4].setText(format(teamList[x].getExchangeScoreAvg()));
-				table[x][5].setText(format(teamList[x].getSwitchScoreAvg()));
-				table[x][6].setText(format(teamList[x].getScaleScoreAvg()));
+				table[x][2].setText(format(teamList[x].getAutoCrossLineRate()) + "%");
+				table[x][3].setText(format(teamList[x].getAutoSwitchScoreRate()) + "%");
+				table[x][4].setText(format(teamList[x].getAutoScaleScoreRate()) + "%");
+				table[x][5].setText(format(teamList[x].getRobotFunctionedRate()) + "%");
+				table[x][6].setText(format(teamList[x].getExchangeScoreAvg()));
+				table[x][7].setText(format(teamList[x].getSwitchScoreAvg()));
+				table[x][8].setText(format(teamList[x].getScaleScoreAvg()));
+				table[x][9].setText(format(teamList[x].getWinRate()) + "%");
 			}
 		}
 		else {
 			for(int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[table.length - x - 1].getName()));
 				table[x][1].setText(format(teamList[table.length - x - 1].getClimbRate()) + "%");
-				table[x][2].setText(format(teamList[table.length - x - 1].getAutoScoreRate()) + "%");
-				table[x][3].setText(format(teamList[table.length - x - 1].getRobotFunctionedRate()) + "%");
-				table[x][4].setText(format(teamList[table.length - x - 1].getExchangeScoreAvg()));
-				table[x][5].setText(format(teamList[table.length - x - 1].getSwitchScoreAvg()));
-				table[x][6].setText(format(teamList[table.length - x - 1].getScaleScoreAvg()));
+				table[x][2].setText(format(teamList[table.length - x - 1].getAutoCrossLineRate()) + "%");
+				table[x][3].setText(format(teamList[table.length - x - 1].getAutoSwitchScoreRate()) + "%");
+				table[x][4].setText(format(teamList[table.length - x - 1].getAutoScaleScoreRate()) + "%");
+				table[x][5].setText(format(teamList[table.length - x - 1].getRobotFunctionedRate()) + "%");
+				table[x][6].setText(format(teamList[table.length - x - 1].getExchangeScoreAvg()));
+				table[x][7].setText(format(teamList[table.length - x - 1].getSwitchScoreAvg()));
+				table[x][8].setText(format(teamList[table.length - x - 1].getScaleScoreAvg()));
+				table[x][9].setText(format(teamList[table.length - x - 1].getWinRate()) + "%");
 			}
 		}
 	}
