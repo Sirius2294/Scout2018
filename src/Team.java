@@ -5,7 +5,7 @@ public class Team {
 	private int round;
 	public static final int numOfRounds = 4;//Change this when we get to the competition
 	
-	private boolean[] climb;
+	private int[] climb;
 	private boolean[] autoCrossLine;
 	private boolean[] autoSwitchScore;
 	private boolean[] autoScaleScore;
@@ -23,7 +23,7 @@ public class Team {
 		
 		round = 0;
 		
-		climb = new boolean[numOfRounds];
+		climb = new int[numOfRounds];
 		autoCrossLine = new boolean[numOfRounds];
 		autoSwitchScore = new boolean[numOfRounds];
 		autoScaleScore = new boolean[numOfRounds];
@@ -48,7 +48,7 @@ public class Team {
 		case 0:
 			return (double) name;
 		case 1:
-			return getClimbRate();
+			return getClimbAvg();
 		case 2:
 			return getAutoCrossLineRate();
 		case 3:
@@ -75,8 +75,8 @@ public class Team {
 	 * "add" methods
 	 */
 	
-	public void addClimb(boolean didClimb) {
-		climb[round] = didClimb;
+	public void addClimb(int numOfClimbs) {
+		climb[round] = numOfClimbs;
 	}
 	
 	public void addAutoCrossLine(boolean didScore) {
@@ -124,7 +124,7 @@ public class Team {
 		return name;
 	}
 	
-	public boolean getClimb(int round) {
+	public int getClimb(int round) {
 		return climb[round];
 	}
 	
@@ -168,14 +168,12 @@ public class Team {
 	 * Data "gets"
 	 */
 	
-	public double getClimbRate() {
-		double rate = 0;
+	public double getClimbAvg() {
+		double avg = 0;
 		for(int x = 0; x < round; x++) {
-			if(climb[x]) {
-				rate++;
-			}
+			avg += climb[x];
 		}
-		return rate / round * 100;
+		return avg / round;
 	}
 	
 	public double getAutoCrossLineRate() {

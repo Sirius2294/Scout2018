@@ -32,7 +32,7 @@ public class Save {
 			for(int q = 0; q < list.get(x).getRound(); q++) {
 				pen.newLine();
 				//pen.write(format(q) + " ");
-				pen.write(format(list.get(x).getClimb(q) ? 1 : 0) + " ");
+				pen.write(format(list.get(x).getClimb(q)) + " ");
 				pen.write(format(list.get(x).getAutoCrossLine(q) ? 1 : 0) + " ");
 				pen.write(format(list.get(x).getAutoSwitchScore(q) ? 1 : 0) + " ");
 				pen.write(format(list.get(x).getAutoScaleScore(q) ? 1 : 0) + " ");
@@ -64,7 +64,7 @@ public class Save {
 			numOfRounds = Integer.parseInt(book.next());
 			
 			for(int x = 0; x < numOfRounds; x++) {
-				t.addClimb(book.next().equals("1"));
+				t.addClimb(Integer.parseInt(book.next()));
 				t.addAutoCrossLine(book.next().equals("1"));
 				t.addAutoSwitchScore(book.next().equals("1"));
 				t.addAutoScaleScore(book.next().equals("1"));

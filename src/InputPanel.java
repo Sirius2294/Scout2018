@@ -24,13 +24,14 @@ public class InputPanel extends JPanel{
 	JLabel exchangeScoreLbl;
 	JLabel switchScoreLbl;
 	JLabel scaleScoreLbl;
+	JLabel climbLbl;
 	
 	/*
 	 * Fields and Buttons to input team data
 	 */
 	JTextField nameFld;
 	
-	JRadioButton climbBtn;
+	JTextField climbFld;
 	JRadioButton autoCrossLineBtn;
 	JRadioButton autoSwitchScoreBtn;
 	JRadioButton autoScaleScoreBtn;
@@ -68,13 +69,14 @@ public class InputPanel extends JPanel{
 		
 		//Initializes all the JLabel headers
 		nameLbl = new JLabel("Name");
-		
+		climbLbl = new JLabel("Climb");
 		exchangeScoreLbl = new JLabel("Exchange Score");
 		switchScoreLbl = new JLabel("Switch Score");
 		scaleScoreLbl = new JLabel("Scale Score");
 		
 		//Sets the font of all JLabel headers to font
 		nameLbl.setFont(font);
+		climbLbl.setFont(font);
 		exchangeScoreLbl.setFont(font);
 		switchScoreLbl.setFont(font);
 		scaleScoreLbl.setFont(font);
@@ -83,7 +85,7 @@ public class InputPanel extends JPanel{
 		//Initializes all the Fields and Buttons for team data input
 		nameFld = new JTextField(4);
 		
-		climbBtn = new JRadioButton("Climb");
+		climbFld = new JTextField(4);
 		autoCrossLineBtn = new JRadioButton("Auto Cross Line");
 		autoSwitchScoreBtn = new JRadioButton("Auto Switch Score");
 		autoScaleScoreBtn = new JRadioButton("Auto Scale Score");
@@ -98,8 +100,8 @@ public class InputPanel extends JPanel{
 		statsBtn = new JButton("Stats");
 		
 		//sets the font of all Fields and Buttons for team data input to font
-		nameLbl.setFont(font);
-		climbBtn.setFont(font);
+		nameFld.setFont(font);
+		climbFld.setFont(font);
 		autoCrossLineBtn.setFont(font);
 		autoSwitchScoreBtn.setFont(font);
 		autoScaleScoreBtn.setFont(font);
@@ -115,7 +117,6 @@ public class InputPanel extends JPanel{
 		//declares and initializes radioListener
 		radioButtonListener radioListener = new radioButtonListener();
 		//adds radioListener to all JRadioButton objects
-		climbBtn.addActionListener(radioListener);
 		autoCrossLineBtn.addActionListener(radioListener);
 		autoSwitchScoreBtn.addActionListener(radioListener);
 		autoScaleScoreBtn.addActionListener(radioListener);
@@ -135,7 +136,7 @@ public class InputPanel extends JPanel{
 					index = getTeamIndex(Integer.parseInt(nameFld.getText()));
 					if(index >= 0) {
 						if(robotFunctionedBtn.isSelected()) {
-							teamList.get(index).addClimb(climbBtn.isSelected());
+							teamList.get(index).addClimb(Integer.parseInt(climbFld.getText()));
 							teamList.get(index).addAutoCrossLine(autoCrossLineBtn.isSelected());
 							teamList.get(index).addAutoSwitchScore(autoSwitchScoreBtn.isSelected());
 							teamList.get(index).addAutoScaleScore(autoScaleScoreBtn.isSelected());
@@ -146,7 +147,7 @@ public class InputPanel extends JPanel{
 							teamList.get(index).addWin(winBtn.isSelected());
 						}
 						else {
-							teamList.get(index).addClimb(false);
+							teamList.get(index).addClimb(0);
 							teamList.get(index).addAutoCrossLine(false);
 							teamList.get(index).addAutoSwitchScore(false);
 							teamList.get(index).addAutoScaleScore(false);
@@ -199,19 +200,20 @@ public class InputPanel extends JPanel{
 		 */
 		
 		add(nameLbl, getLabelConstraints(0));
-		add(exchangeScoreLbl, getLabelConstraints(3));
-		add(switchScoreLbl, getLabelConstraints(4));
-		add(scaleScoreLbl, getLabelConstraints(5));
+		add(climbLbl, getLabelConstraints(8));
+		add(exchangeScoreLbl, getLabelConstraints(5));
+		add(switchScoreLbl, getLabelConstraints(6));
+		add(scaleScoreLbl, getLabelConstraints(7));
 		
 		add(nameFld, getComponentConstraints(0));
-		add(climbBtn, getComponentConstraints(6));
+		add(climbFld, getComponentConstraints(8));
 		add(autoCrossLineBtn, getComponentConstraints(1));
 		add(autoSwitchScoreBtn, getComponentConstraints(2));
 		add(autoScaleScoreBtn, getComponentConstraints(3));
 		add(robotFunctionedBtn, getComponentConstraints(4));
 		add(exchangeScoreFld, getComponentConstraints(5));
-		add(switchScoreFld, getComponentConstraints(7));
-		add(scaleScoreFld, getComponentConstraints(8));
+		add(switchScoreFld, getComponentConstraints(6));
+		add(scaleScoreFld, getComponentConstraints(7));
 		add(winBtn, getComponentConstraints(9));
 		
 		add(submitBtn, getComponentConstraints(10));
@@ -230,7 +232,7 @@ public class InputPanel extends JPanel{
 	private void resetComponents() {
 		nameFld.setText("");
 		
-		climbBtn.setSelected(false);
+		climbFld.setText("");
 		autoCrossLineBtn.setSelected(false);
 		autoSwitchScoreBtn.setSelected(false);
 		autoScaleScoreBtn.setSelected(false);

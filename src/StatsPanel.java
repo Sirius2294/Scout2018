@@ -113,7 +113,7 @@ public class StatsPanel extends JPanel {
 		if(forward) {
 			for(int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[x].getName()));
-				table[x][1].setText(format(teamList[x].getClimbRate()) + "%");
+				table[x][1].setText(format(teamList[x].getClimbAvg()));
 				table[x][2].setText(format(teamList[x].getAutoCrossLineRate()) + "%");
 				table[x][3].setText(format(teamList[x].getAutoSwitchScoreRate()) + "%");
 				table[x][4].setText(format(teamList[x].getAutoScaleScoreRate()) + "%");
@@ -127,7 +127,7 @@ public class StatsPanel extends JPanel {
 		else {
 			for(int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[table.length - x - 1].getName()));
-				table[x][1].setText(format(teamList[table.length - x - 1].getClimbRate()) + "%");
+				table[x][1].setText(format(teamList[table.length - x - 1].getClimbAvg()));
 				table[x][2].setText(format(teamList[table.length - x - 1].getAutoCrossLineRate()) + "%");
 				table[x][3].setText(format(teamList[table.length - x - 1].getAutoSwitchScoreRate()) + "%");
 				table[x][4].setText(format(teamList[table.length - x - 1].getAutoScaleScoreRate()) + "%");
