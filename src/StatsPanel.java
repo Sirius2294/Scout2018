@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class StatsPanel extends JPanel {
+	
+	private JPanel inPanel;
 
 	private Font font;
 
@@ -18,7 +20,11 @@ public class StatsPanel extends JPanel {
 	private int pivotPosition;
 
 	public StatsPanel(ArrayList<Team> list) {
-		setLayout(new GridLayout(list.size() + 1, 10));
+		setLayout(new GridBagLayout());
+		
+		inPanel = new JPanel();
+		
+		inPanel.setLayout(new GridLayout(list.size(), 10));
 
 		font = new Font("Sansserif", Font.PLAIN, 15);
 
@@ -48,7 +54,7 @@ public class StatsPanel extends JPanel {
 
 		for (int x = 0; x < headers.length; x++) {
 			headers[x].setFont(font);
-			add(headers[x]);
+			add(headers[x], getHeaderConstraints(x));
 		}
 
 		for (int row = 0; row < table.length; row++) {
@@ -56,10 +62,11 @@ public class StatsPanel extends JPanel {
 				table[row][col] = new JTextField();
 				table[row][col].setFont(font);
 				table[row][col].setEditable(false);
-				add(table[row][col]);
+				inPanel.add(table[row][col]);
 			}
 		}
 		headers[0].doClick();
+		add(new JScrollPane(inPanel), getGridConstraints(list.size()));
 	}
 
 	private class HeaderListener implements ActionListener {
@@ -189,5 +196,38 @@ public class StatsPanel extends JPanel {
 		}
 
 		return result;
+	}
+	
+	private GridBagConstraints getHeaderConstraints(int column) {
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.fill = 1;
+		c.weightx = 1.0;
+		
+		c.gridy = 0;
+		c.gridx = column;
+		
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		
+		return c;
+	}
+	
+	private GridBagConstraints getGridConstraints(int size) {
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.fill = 1;
+		c.weightx = 1.0;
+		c.weighty = 1.0;
+		
+		c.gridx = 0;
+		c.gridy= 1;
+		
+		c.gridheight = size;
+		c.gridwidth = 10;
+		
+		return c;
 	}
 }
