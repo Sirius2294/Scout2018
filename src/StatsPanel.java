@@ -27,7 +27,7 @@ public class StatsPanel extends JPanel {
 		selectionMode = new int[headers.length];
 
 		headers[0] = new JButton("Team #");
-		headers[1] = new JButton("Climb Rate");
+		headers[1] = new JButton("Climb AVG");
 		headers[2] = new JButton("Auto CrossLine Rate");
 		headers[3] = new JButton("Auto Switch Score Rate");
 		headers[4] = new JButton("Auto Scale Score Rate");
