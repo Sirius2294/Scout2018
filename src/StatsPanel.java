@@ -10,20 +10,20 @@ public class StatsPanel extends JPanel {
 
 	private JButton[] headers;
 	private int[] selectionMode;
-	
+
 	private Team[] teamList;
 
 	private JTextField[][] table;
-	
+
 	private int pivotPosition;
 
 	public StatsPanel(ArrayList<Team> list) {
-		setLayout(new GridLayout(list.size()+1, 10));
+		setLayout(new GridLayout(list.size() + 1, 10));
 
-		font = Screenfit.getFont();
-		
+		font = new Font("Sansserif", Font.PLAIN, 15);
+
 		headers = new JButton[10];
-		
+
 		selectionMode = new int[headers.length];
 
 		headers[0] = new JButton("Team #");
@@ -36,12 +36,11 @@ public class StatsPanel extends JPanel {
 		headers[7] = new JButton("Switch Score AVG");
 		headers[8] = new JButton("Scale Score AVG");
 		headers[9] = new JButton("Win Rate");
-		
-		for(int x = 0; x < headers.length; x++) {
+
+		for (int x = 0; x < headers.length; x++) {
 			headers[x].addActionListener(new HeaderListener(x));
 		}
-		
-		
+
 		teamList = new Team[list.size()];
 		list.toArray(teamList);
 
@@ -75,12 +74,12 @@ public class StatsPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			for(int x = 0; x < teamList.length; x++) {
+			for (int x = 0; x < teamList.length; x++) {
 				teamList[x].setSortingType(index);
 			}
-			switch(selectionMode[index]) {
+			switch (selectionMode[index]) {
 			case 0:
-				for(int x = 0; x < headers.length; x++) {
+				for (int x = 0; x < headers.length; x++) {
 					headers[x].setBackground(defaultBackground);
 					selectionMode[x] = 0;
 				}
@@ -99,19 +98,18 @@ public class StatsPanel extends JPanel {
 				arrangeTable(true);
 				break;
 			}
-			
 		}
 	}
-	
+
 	/*
 	 * Sorting Table
 	 */
-	
+
 	private void arrangeTable(boolean forward) {
 		teamList = quicksort(teamList, 0, teamList.length);
-		
-		if(forward) {
-			for(int x = 0; x < table.length; x++) {
+
+		if (forward) {
+			for (int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[x].getName()));
 				table[x][1].setText(format(teamList[x].getClimbAvg()));
 				table[x][2].setText(format(teamList[x].getAutoCrossLineRate()) + "%");
@@ -123,9 +121,8 @@ public class StatsPanel extends JPanel {
 				table[x][8].setText(format(teamList[x].getScaleScoreAvg()));
 				table[x][9].setText(format(teamList[x].getWinRate()) + "%");
 			}
-		}
-		else {
-			for(int x = 0; x < table.length; x++) {
+		} else {
+			for (int x = 0; x < table.length; x++) {
 				table[x][0].setText(format(teamList[table.length - x - 1].getName()));
 				table[x][1].setText(format(teamList[table.length - x - 1].getClimbAvg()));
 				table[x][2].setText(format(teamList[table.length - x - 1].getAutoCrossLineRate()) + "%");
@@ -139,59 +136,58 @@ public class StatsPanel extends JPanel {
 			}
 		}
 	}
-	
+
 	private <T> String format(T n) {
 		return "" + n;
 	}
-	
-	
+
 	/*
 	 * Sorting Algorithm
 	 */
-	
+
 	private Team[] quicksort(Team[] list, int low, int high) {
-		
+
 		list = partition(list, low, high);
-		
-		if(pivotPosition != low) {
+
+		if (pivotPosition != low) {
 			list = quicksort(list, low, pivotPosition);
 		}
-		
-		if(high != pivotPosition+1) {
-			list = quicksort(list, pivotPosition+1, high);
+
+		if (high != pivotPosition + 1) {
+			list = quicksort(list, pivotPosition + 1, high);
 		}
 		return list;
 	}
-	
+
 	private Team[] partition(Team[] list, int low, int high) {
 		Team[] result = new Team[list.length];
 		Team pivot = list[low];
 		int counter = low;
-		
-		for(int x = low+1; x < high; x++) {
-			if(list[x].getSortingData() < pivot.getSortingData()) {
+
+		for (int x = low + 1; x < high; x++) {
+			if (list[x].getSortingData() < pivot.getSortingData()) {
 				result[counter] = list[x];
 				counter++;
 			}
 		}
-		
+
 		pivotPosition = counter;
 		result[counter] = pivot;
 		counter++;
-		
-		for(int x = low+1; x < high; x++) {
-			if(list[x].getSortingData() >= pivot.getSortingData()) {
+
+		for (int x = low + 1; x < high; x++) {
+			if (list[x].getSortingData() >= pivot.getSortingData()) {
 				result[counter] = list[x];
 				counter++;
 			}
 		}
-		
-		for(int x = 0; x < list.length; x++) {
-			if(x < low || x >= high) {
+
+		for (int x = 0; x < list.length; x++) {
+			if (x < low || x >= high) {
 				result[x] = list[x];
 			}
 		}
-		
+
 		return result;
 	}
 }
