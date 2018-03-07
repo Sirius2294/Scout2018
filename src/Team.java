@@ -3,7 +3,7 @@ public class Team {
 	private int name;
 	
 	private int round;
-	public static final int numOfRounds = 4;//Change this when we get to the competition
+	public static final int numOfRounds = 10;//Change this when we get to the competition
 	
 	private int[] climb;
 	private boolean[] autoCrossLine;
