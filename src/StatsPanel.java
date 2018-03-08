@@ -100,12 +100,12 @@ public class StatsPanel extends JPanel {
 				}
 				selectionMode[index] = 1;
 				headers[index].setBackground(new Color(0, 200, 0));
-				arrangeTable(true);
+				arrangeTable(false);
 				break;
 			case 1:
 				selectionMode[index] = 2;
 				headers[index].setBackground(new Color(200, 0, 0));
-				arrangeTable(false);
+				arrangeTable(true);
 				break;
 			case 2:
 				selectionMode[index] = 1;
