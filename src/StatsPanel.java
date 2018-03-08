@@ -7,6 +7,7 @@ import java.awt.event.*;
 public class StatsPanel extends JPanel {
 	
 	private JPanel inPanel;
+	private JPanel topPanel;
 
 	private Font font;
 
@@ -25,8 +26,13 @@ public class StatsPanel extends JPanel {
 		inPanel = new JPanel();
 		
 		inPanel.setLayout(new GridLayout(list.size(), 10));
+		
+		topPanel = new JPanel();
+		
+		topPanel.setLayout(new GridLayout(1, 10));
 
-		font = new Font("Sansserif", Font.PLAIN, 15);
+		//font = new Font("Sansserif", Font.PLAIN, 15);
+		font  = Screenfit.getFont();
 
 		headers = new JButton[10];
 
@@ -54,7 +60,8 @@ public class StatsPanel extends JPanel {
 
 		for (int x = 0; x < headers.length; x++) {
 			headers[x].setFont(font);
-			add(headers[x], getHeaderConstraints(x));
+			//add(headers[x], getHeaderConstraints(x));
+			topPanel.add(headers[x]);
 		}
 
 		for (int row = 0; row < table.length; row++) {
@@ -66,6 +73,7 @@ public class StatsPanel extends JPanel {
 			}
 		}
 		headers[0].doClick();
+		add(topPanel, getTopConstraints());
 		add(new JScrollPane(inPanel), getGridConstraints(list.size()));
 	}
 
@@ -210,6 +218,22 @@ public class StatsPanel extends JPanel {
 		
 		c.gridwidth = 1;
 		c.gridheight = 1;
+		
+		return c;
+	}
+	
+	private GridBagConstraints getTopConstraints() {
+		GridBagConstraints c = new GridBagConstraints();
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.fill = 1;
+		c.weightx = 1.0;
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		
+		c.gridheight = 1;
+		c.gridwidth = 10;
 		
 		return c;
 	}

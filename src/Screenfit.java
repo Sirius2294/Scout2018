@@ -17,7 +17,7 @@ public class Screenfit {
 	}
 	
 	public static Font getFont() {
-		Font f = new Font("Sansserif", Font.PLAIN, (int) getScreenSize().getHeight() / 54);
+		Font f = new Font("Sansserif", Font.PLAIN, (int) getScreenSize().getHeight() / 84);
 		return f;
 	}
 	
