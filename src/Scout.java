@@ -26,7 +26,7 @@ public class Scout {
 		Sizer s = new Sizer();
 		Thread t = new Thread(s);
 		//begins thread t
-		t.start();
+		//t.start();
 	}
 	
 	//Creates a JFrame that displays the current size of frame and as well as the screen size
